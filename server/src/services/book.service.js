@@ -13,8 +13,8 @@ async function getOneBook(id) {
 }
 
 async function addBook(data) {
-    const {name , description , price , created_at , upadated_at} = data
-    const query = `INSERT INTO book (name , description , price , created_at , upadated_at ) VALUES( '${name}' , '${description}' , '${price}' , '${created_at}' , '${upadated_at}' )`
+    const {name , description , price } = data
+    const query = `INSERT INTO book (name , description , price ) VALUES( '${name}' , '${description}' , '${price}' )`
     let result = await database.execute(query)
     if (result) {
         return result[0].insertId;
@@ -22,10 +22,9 @@ async function addBook(data) {
 }
 
 async function updateBook(id,data) {
-    const {name , description , price , created_at , upadated_at} = data
+    const {name , description , price } = data
     const query = `UPDATE book 
-                   SET name = '${name}' , description = '${description}' , 
-                       price = '${price}' , created_at = '${created_at}' , upadated_at = '${upadated_at}' 
+                   SET name = '${name}' , description = '${description}' , price = '${price}'  
                    WHERE id = ${id} `
     let result = await database.execute(query)
 }

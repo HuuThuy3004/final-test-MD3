@@ -31,10 +31,9 @@ async function addBook(req,res) {
         res.send('Add successfully !!');
     } catch (error) {
         res.status(500).json({
-            message: "server error!"
+            message: `${error}`
         })
     }
-    
 }
 
 async function updateBook(req,res) {

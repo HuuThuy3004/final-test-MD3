@@ -4,31 +4,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './css/AddBook.css'
 
-export default function AddBook() {
+
+export default function AddAuthor() {
     //Các thầy chấm điểm nhớ reaload trang F5 lại nha các thầy
-    const [books, setBooks] = useState({
+    const [author, setAuthor] = useState({
         name: '',
-        description: '',
-        price: '',
+        biography: ''
     });
 
     const navigate = useNavigate()
 
     async function handleSubmit(event) {
         event.preventDefault()
-        await axios.post('http://localhost:8080/api/v1/book' , books)
+        await axios.post('http://localhost:8080/api/v1/author' , author)
         .then( res=>{
-            alert('Add book successfully!')
-            navigate('/')
+            alert('Add author successfully!')
+            navigate('/author')
         })
         .catch(err => console.log(err))
     }
 
-
     return (
         <div className='form-add'>
             <h1>
-                Add Book
+                Add Author
                 <Link to='/'>
                     <ArrowBackIcon />
                 </Link>
@@ -38,31 +37,24 @@ export default function AddBook() {
                     <tr>
                         <td>Name:</td>
                         <td>
-                            <input type="text" name='name' placeholder='Enter name' onChange={ e => setBooks({...books , name: e.target.value})} />
+                            <input type="text" name='name' placeholder='Enter name' onChange={ e => setAuthor({...author , name: e.target.value})} />
                         </td>
                     </tr>
                     <tr>
-                        <td>Description:</td>
+                        <td>Biography:</td>
                         <td>
-                            <input type="text" name='description' placeholder='Enter description' className='ipt-des' onChange={ e => setBooks({...books , description: e.target.value})} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Price:</td>
-                        <td>
-                            <input type="number" name='price' placeholder='Enter price' onChange={ e => setBooks({...books , price: e.target.value})} />
+                            <input type="text" name='biography' placeholder='Enter description' className='ipt-des' onChange={ e => setAuthor({...author , biography: e.target.value})} />
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <button className='btn-add'>Add Book</button>
+                            <button className='btn-add-author'>Add Author</button>
                         </td>
                     </tr>
                 </table>
             </form>
             
-
         </div>
     )
 }
